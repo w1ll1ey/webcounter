@@ -1,61 +1,450 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.1.1 (Python 3.11.5 on darwin)" generated="2024-11-18T20:36:32.666571" rpa="false" schemaversion="5">
-<suite id="s1" name="Reset" source="/Users/vilii/Documents/webcounter/webcounter/src/tests/reset.robot">
+<robot generator="Robot 7.1.1 (Python 3.11.5 on darwin)" generated="2024-11-18T20:44:24.483608" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/Users/vilii/Documents/webcounter/webcounter/src/tests">
+<suite id="s1-s1" name="Increment" source="/Users/vilii/Documents/webcounter/webcounter/src/tests/increment.robot">
 <kw name="Open And Configure Browser" owner="resource" type="SETUP">
+<if>
+<branch type="IF" condition="$BROWSER == 'chrome'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-11-18T20:44:24.552616" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x1030fda90&gt;</msg>
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-11-18T20:44:24.552515" elapsed="0.000116"/>
+</kw>
+<status status="PASS" start="2024-11-18T20:44:24.551498" elapsed="0.001163"/>
+</branch>
+<branch type="ELSE IF" condition="$BROWSER == 'firefox'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].FirefoxOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:24.552721" elapsed="0.000010"/>
+</kw>
+<status status="NOT RUN" start="2024-11-18T20:44:24.552678" elapsed="0.000074"/>
+</branch>
+<status status="PASS" start="2024-11-18T20:44:24.551487" elapsed="0.001277"/>
+</if>
+<if>
+<branch type="IF" condition="$HEADLESS == 'true'">
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2024-11-18T20:44:24.552850" elapsed="0.000061"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--headless</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2024-11-18T20:44:24.552950" elapsed="0.000059"/>
+</kw>
+<status status="PASS" start="2024-11-18T20:44:24.552783" elapsed="0.000244"/>
+</branch>
+<branch type="ELSE">
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>${DELAY}</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-11-18T20:36:32.729094" elapsed="0.000104"/>
+<status status="NOT RUN" start="2024-11-18T20:44:24.553073" elapsed="0.000009"/>
 </kw>
+<status status="NOT RUN" start="2024-11-18T20:44:24.553042" elapsed="0.000055"/>
+</branch>
+<status status="PASS" start="2024-11-18T20:44:24.552777" elapsed="0.000330"/>
+</if>
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-11-18T20:36:32.729343" level="INFO">Opening browser 'firefox' to base url 'None'.</msg>
+<msg time="2024-11-18T20:44:24.553233" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
 <arg>browser=${BROWSER}</arg>
+<arg>options=${options}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-11-18T20:36:32.729265" elapsed="1.186824"/>
+<status status="PASS" start="2024-11-18T20:44:24.553142" elapsed="0.899146"/>
 </kw>
-<status status="PASS" start="2024-11-18T20:36:32.728828" elapsed="1.187483"/>
+<status status="PASS" start="2024-11-18T20:44:24.551412" elapsed="0.901052"/>
 </kw>
-<test id="s1-t1" name="When counter has a nonzero value and it is reset the value becomes zero" line="7">
+<test id="s1-s1-t1" name="At start the counter is zero" line="7">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2024-11-18T20:36:33.916902" level="INFO">Opening url 'http://localhost:5001'</msg>
+<msg time="2024-11-18T20:44:25.453030" level="INFO">Opening url 'http://localhost:5001'</msg>
+<msg time="2024-11-18T20:44:25.844958" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-5.png"&gt;&lt;img src="selenium-screenshot-5.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2024-11-18T20:44:25.845114" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000102c5d5dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000102c55e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x00000001026c0100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x00000001026b9514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x00000001026ab920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x00000001026ad300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x00000001026abccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x00000001026ab548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x00000001026ab494 cxxbridge1$string$len + 3304
+9   chromedriver                        0x00000001026a9844 core::str::slice_error_fail::h1cab30ac4b13c655 + 60316
+10  chromedriver                        0x00000001026a9dd8 core::str::slice_error_fail::h1cab30ac4b13c655 + 61744
+11  chromedriver                        0x00000001026c25c0 cxxbridge1$string$len + 97812
+12  chromedriver                        0x000000010273c550 cxxbridge1$string$len + 597412
+13  chromedriver                        0x000000010273bba8 cxxbridge1$string$len + 594940
+14  chromedriver                        0x00000001026f70fc cxxbridge1$string$len + 313680
+15  chromedriver                        0x00000001026f7d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000102c2864c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000102c2b988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000102c0fa5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000102c2c24c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000102c00ce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000102c469dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000102c46b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000102c55ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8
+</msg>
 <arg>${HOME_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2024-11-18T20:36:33.916768" elapsed="0.591075"/>
+<status status="FAIL" start="2024-11-18T20:44:25.452891" elapsed="0.394649">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000102c5d5dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000102c55e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x00000001026c0100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x00000001026b9514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x00000001026ab920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x00000001026ad300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x00000001026abccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x00000001026ab548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x00000001026ab494 cxxbridge1$strin...
+    [ Message content over the limit has been removed. ]
+...er                        0x00000001026f7d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000102c2864c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000102c2b988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000102c0fa5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000102c2c24c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000102c00ce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000102c469dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000102c46b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000102c55ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8</status>
 </kw>
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-11-18T20:36:34.508418" level="INFO">Clicking button 'Paina'.</msg>
-<arg>Paina</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-11-18T20:36:34.508033" elapsed="1.577541"/>
-</kw>
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-11-18T20:36:36.087436" level="INFO">Clicking button 'Nollaa'.</msg>
-<arg>Nollaa</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-11-18T20:36:36.086629" elapsed="1.554747"/>
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<arg>Laskuri</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:25.847710" elapsed="0.000025"/>
 </kw>
 <kw name="Page Should Contain" owner="SeleniumLibrary">
-<msg time="2024-11-18T20:36:38.663743" level="INFO">Current page contains text 'nappia painettu 0 kertaa'.</msg>
 <arg>nappia painettu 0 kertaa</arg>
 <doc>Verifies that current page contains ``text``.</doc>
-<status status="PASS" start="2024-11-18T20:36:37.642332" elapsed="1.021880"/>
+<status status="NOT RUN" start="2024-11-18T20:44:25.847839" elapsed="0.000013"/>
 </kw>
-<status status="PASS" start="2024-11-18T20:36:33.916417" elapsed="4.748737"/>
+<status status="FAIL" start="2024-11-18T20:44:25.452568" elapsed="0.395381">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000102c5d5dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000102c55e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x00000001026c0100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x00000001026b9514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x00000001026ab920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x00000001026ad300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x00000001026abccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x00000001026ab548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x00000001026ab494 cxxbridge1$strin...
+    [ Message content over the limit has been removed. ]
+...er                        0x00000001026f7d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000102c2864c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000102c2b988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000102c0fa5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000102c2c24c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000102c00ce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000102c469dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000102c46b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000102c55ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8</status>
+</test>
+<test id="s1-s1-t2" name="When button pressed twice the counter is two" line="12">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2024-11-18T20:44:25.848264" level="INFO">Opening url 'http://localhost:5001'</msg>
+<msg time="2024-11-18T20:44:25.966152" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-6.png"&gt;&lt;img src="selenium-screenshot-6.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2024-11-18T20:44:25.966249" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000102c5d5dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000102c55e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x00000001026c0100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x00000001026b9514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x00000001026ab920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x00000001026ad300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x00000001026abccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x00000001026ab548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x00000001026ab494 cxxbridge1$string$len + 3304
+9   chromedriver                        0x00000001026a9844 core::str::slice_error_fail::h1cab30ac4b13c655 + 60316
+10  chromedriver                        0x00000001026a9dd8 core::str::slice_error_fail::h1cab30ac4b13c655 + 61744
+11  chromedriver                        0x00000001026c25c0 cxxbridge1$string$len + 97812
+12  chromedriver                        0x000000010273c550 cxxbridge1$string$len + 597412
+13  chromedriver                        0x000000010273bba8 cxxbridge1$string$len + 594940
+14  chromedriver                        0x00000001026f70fc cxxbridge1$string$len + 313680
+15  chromedriver                        0x00000001026f7d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000102c2864c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000102c2b988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000102c0fa5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000102c2c24c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000102c00ce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000102c469dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000102c46b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000102c55ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8
+</msg>
+<arg>${HOME_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="FAIL" start="2024-11-18T20:44:25.848196" elapsed="0.118345">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000102c5d5dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000102c55e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x00000001026c0100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x00000001026b9514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x00000001026ab920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x00000001026ad300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x00000001026abccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x00000001026ab548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x00000001026ab494 cxxbridge1$strin...
+    [ Message content over the limit has been removed. ]
+...er                        0x00000001026f7d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000102c2864c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000102c2b988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000102c0fa5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000102c2c24c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000102c00ce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000102c469dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000102c46b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000102c55ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8</status>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>Paina</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:25.966665" elapsed="0.000013"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>Paina</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:25.966733" elapsed="0.000009"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>nappia painettu 2 kertaa</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:25.966791" elapsed="0.000008"/>
+</kw>
+<status status="FAIL" start="2024-11-18T20:44:25.848065" elapsed="0.118817">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000102c5d5dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000102c55e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x00000001026c0100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x00000001026b9514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x00000001026ab920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x00000001026ad300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x00000001026abccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x00000001026ab548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x00000001026ab494 cxxbridge1$strin...
+    [ Message content over the limit has been removed. ]
+...er                        0x00000001026f7d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000102c2864c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000102c2b988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000102c0fa5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000102c2c24c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000102c00ce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000102c469dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000102c46b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000102c55ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8</status>
 </test>
 <kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2024-11-18T20:36:38.666573" elapsed="0.890786"/>
+<status status="PASS" start="2024-11-18T20:44:25.967209" elapsed="0.069476"/>
 </kw>
-<status status="PASS" start="2024-11-18T20:36:32.668434" elapsed="6.889140"/>
+<status status="FAIL" start="2024-11-18T20:44:24.491209" elapsed="1.545523"/>
+</suite>
+<suite id="s1-s2" name="Reset" source="/Users/vilii/Documents/webcounter/webcounter/src/tests/reset.robot">
+<kw name="Open And Configure Browser" owner="resource" type="SETUP">
+<if>
+<branch type="IF" condition="$BROWSER == 'chrome'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-11-18T20:44:26.038443" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x1031ec0d0&gt;</msg>
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-11-18T20:44:26.038317" elapsed="0.000140"/>
+</kw>
+<status status="PASS" start="2024-11-18T20:44:26.038194" elapsed="0.000285"/>
+</branch>
+<branch type="ELSE IF" condition="$BROWSER == 'firefox'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].FirefoxOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:26.038536" elapsed="0.000010"/>
+</kw>
+<status status="NOT RUN" start="2024-11-18T20:44:26.038497" elapsed="0.000067"/>
+</branch>
+<status status="PASS" start="2024-11-18T20:44:26.038184" elapsed="0.000393"/>
+</if>
+<if>
+<branch type="IF" condition="$HEADLESS == 'true'">
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2024-11-18T20:44:26.038670" elapsed="0.000074"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--headless</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2024-11-18T20:44:26.038784" elapsed="0.000054"/>
+</kw>
+<status status="PASS" start="2024-11-18T20:44:26.038599" elapsed="0.000258"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>${DELAY}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:26.038908" elapsed="0.000010"/>
+</kw>
+<status status="NOT RUN" start="2024-11-18T20:44:26.038872" elapsed="0.000060"/>
+</branch>
+<status status="PASS" start="2024-11-18T20:44:26.038593" elapsed="0.000351"/>
+</if>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-11-18T20:44:26.039090" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>options=${options}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-11-18T20:44:26.038985" elapsed="0.362754"/>
+</kw>
+<status status="PASS" start="2024-11-18T20:44:26.038116" elapsed="0.364056"/>
+</kw>
+<test id="s1-s2-t1" name="When counter has a nonzero value and it is reset the value becomes zero" line="7">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2024-11-18T20:44:26.402679" level="INFO">Opening url 'http://localhost:5001'</msg>
+<msg time="2024-11-18T20:44:26.594512" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-7.png"&gt;&lt;img src="selenium-screenshot-7.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2024-11-18T20:44:26.594654" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000100c295dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000100c21e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x000000010068c100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x0000000100685514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x0000000100677920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x0000000100679300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x0000000100677ccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x0000000100677548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x0000000100677494 cxxbridge1$string$len + 3304
+9   chromedriver                        0x0000000100675844 core::str::slice_error_fail::h1cab30ac4b13c655 + 60316
+10  chromedriver                        0x0000000100675dd8 core::str::slice_error_fail::h1cab30ac4b13c655 + 61744
+11  chromedriver                        0x000000010068e5c0 cxxbridge1$string$len + 97812
+12  chromedriver                        0x0000000100708550 cxxbridge1$string$len + 597412
+13  chromedriver                        0x0000000100707ba8 cxxbridge1$string$len + 594940
+14  chromedriver                        0x00000001006c30fc cxxbridge1$string$len + 313680
+15  chromedriver                        0x00000001006c3d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000100bf464c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000100bf7988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000100bdba5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000100bf824c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000100bccce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000100c129dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000100c12b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000100c21ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8
+</msg>
+<arg>${HOME_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="FAIL" start="2024-11-18T20:44:26.402568" elapsed="0.192440">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000100c295dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000100c21e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x000000010068c100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x0000000100685514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x0000000100677920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x0000000100679300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x0000000100677ccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x0000000100677548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x0000000100677494 cxxbridge1$strin...
+    [ Message content over the limit has been removed. ]
+...er                        0x00000001006c3d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000100bf464c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000100bf7988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000100bdba5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000100bf824c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000100bccce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000100c129dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000100c12b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000100c21ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8</status>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>Paina</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:26.595172" elapsed="0.000013"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>Nollaa</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:26.595239" elapsed="0.000009"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>nappia painettu 0 kertaa</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2024-11-18T20:44:26.595295" elapsed="0.000008"/>
+</kw>
+<status status="FAIL" start="2024-11-18T20:44:26.402279" elapsed="0.193110">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=130.0.6723.119)
+Stacktrace:
+0   chromedriver                        0x0000000100c295dc cxxbridge1$str$ptr + 3653648
+1   chromedriver                        0x0000000100c21e3c cxxbridge1$str$ptr + 3623024
+2   chromedriver                        0x000000010068c100 cxxbridge1$string$len + 88404
+3   chromedriver                        0x0000000100685514 cxxbridge1$string$len + 60776
+4   chromedriver                        0x0000000100677920 cxxbridge1$string$len + 4468
+5   chromedriver                        0x0000000100679300 cxxbridge1$string$len + 11092
+6   chromedriver                        0x0000000100677ccc cxxbridge1$string$len + 5408
+7   chromedriver                        0x0000000100677548 cxxbridge1$string$len + 3484
+8   chromedriver                        0x0000000100677494 cxxbridge1$strin...
+    [ Message content over the limit has been removed. ]
+...er                        0x00000001006c3d4c cxxbridge1$string$len + 316832
+16  chromedriver                        0x0000000100bf464c cxxbridge1$str$ptr + 3436672
+17  chromedriver                        0x0000000100bf7988 cxxbridge1$str$ptr + 3449788
+18  chromedriver                        0x0000000100bdba5c cxxbridge1$str$ptr + 3335312
+19  chromedriver                        0x0000000100bf824c cxxbridge1$str$ptr + 3452032
+20  chromedriver                        0x0000000100bccce8 cxxbridge1$str$ptr + 3274524
+21  chromedriver                        0x0000000100c129dc cxxbridge1$str$ptr + 3560464
+22  chromedriver                        0x0000000100c12b58 cxxbridge1$str$ptr + 3560844
+23  chromedriver                        0x0000000100c21ad4 cxxbridge1$str$ptr + 3622152
+24  libsystem_pthread.dylib             0x000000018d94df94 _pthread_start + 136
+25  libsystem_pthread.dylib             0x000000018d948d34 thread_start + 8</status>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-11-18T20:44:26.595622" elapsed="0.067831"/>
+</kw>
+<status status="FAIL" start="2024-11-18T20:44:26.036995" elapsed="0.626499"/>
+</suite>
+<status status="FAIL" start="2024-11-18T20:44:24.484114" elapsed="2.179658"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="3" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Reset">Reset</stat>
+<stat pass="0" fail="3" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s1" name="Increment">Tests.Increment</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s2" name="Reset">Tests.Reset</stat>
 </suite>
 </statistics>
 <errors>
